@@ -4,6 +4,7 @@
   "description": "Serverless Example for LogRocket Blog",
   "main": "handler.js",
   "scripts": {
+    "dev": "nodemon --exec 'serverless offline start --skipCacheInvalidation'",
     "start": "serverless offline start --skipCacheInvalidation",
     "deploy": "sls deploy -v"
   },
@@ -18,6 +19,7 @@
   "author": "Alexander Nnakwue",
   "license": "MIT",
   "devDependencies": {
+    "nodemon": "^2.0.15",
     "serverless-dotenv": "^1.0.0-beta.2",
     "serverless-dotenv-plugin": "^2.1.1",
     "serverless-offline": "^5.12.0"
