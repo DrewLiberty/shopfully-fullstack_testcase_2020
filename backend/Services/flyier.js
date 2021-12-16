@@ -9,8 +9,6 @@ module.exports = {
   async getPaginated (limit, page) {
     let flyiers = await this.getAll()
 
-    console.log(flyiers)
-
     const pageCount = Math.ceil(flyiers.length / limit)
 
     if (page === 1) {
