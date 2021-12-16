@@ -1,7 +1,7 @@
 import * as bodyParser from 'body-parser'
 import * as paginate from 'express-paginate'
-import dataset from '../dataset'
 import * as express from 'express'
+import * as productService from '../Services/flyier'
 
 const serverless = require('serverless-http')
 
@@ -20,33 +20,14 @@ app.use((req, res, next) => {
 
 //  function for getting all products
 app.get('/', async (req, res) => {
-  let dataset = req.app.get('dataset')
-
   const {
     limit,
     page
   } = req.query
 
-  const pageCount = Math.ceil(dataset.length / limit)
+  const result = await productService.getPaginated(limit, page)
 
-  if (page === 1) { dataset = dataset.slice(0, limit) } else { dataset = dataset.slice((page - 1) * limit, page * limit) }
-
-  return res.status(200).send({
-    data: dataset,
-    ...(page > 1 ? { previous: page - 1 } : {}),
-    ...(paginate.hasNextPages(req)(pageCount) === true ? { next: page + 1 } : {})
-  })
+  return res.status(200).send(result)
 })
 
-// module.exports.handler = serverless(app)
-
-const handler = serverless(app)
-module.exports.handler = async (event, context) => {
-  const datasetResult = await dataset()
-  app.set('dataset', datasetResult)
-
-  // you can do other things here
-  const result = await handler(event, context)
-  // and here
-  return result
-}
+module.exports.handler = serverless(app)
