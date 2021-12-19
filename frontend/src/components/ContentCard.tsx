@@ -18,11 +18,19 @@ export default function ContentCard ({
   title,
   category
 }: {
-  identifier: number,
-  retailer: string,
-  title: string,
+  identifier: number
+  retailer: string
+  title: string
   category: string
 }) {
+  const backgroundImageUrl =
+    'https://picsum.photos/seed/' + identifier + '/200/200'
+  const cardImageUrl =
+    'https://picsum.photos/seed/' +
+    identifier +
+    '/200/' +
+    getRandomInt(150, 200)
+
   return (
     <Card
       sx={{
@@ -35,12 +43,12 @@ export default function ContentCard ({
         elevation={0}
         sx={{
           position: 'relative',
-          height: '200px',
-          width: '200px'
+          height: '10rem',
+          width: 'auto'
         }}
       >
         <CardMedia
-          image={'https://picsum.photos/seed/' + identifier + '/200/200'}
+          image={backgroundImageUrl}
           sx={{
             filter: 'blur(20px)',
             height: '100%',
@@ -49,12 +57,7 @@ export default function ContentCard ({
         />
         <CardMedia
           component='img'
-          image={
-            'https://picsum.photos/seed/' +
-            identifier +
-            '/200/' +
-            getRandomInt(150, 200)
-          }
+          image={cardImageUrl}
           sx={{
             objectFit: 'cover',
             maxWidth: '100%',

@@ -64,8 +64,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   padding: theme.spacing(4, 2),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-  justifyContent: 'flex-start',
-  height: 48
+  justifyContent: 'flex-start'
 }))
 
 export default function Dashboard () {
@@ -112,7 +111,7 @@ export default function Dashboard () {
         open={open}
         ModalProps={{ onBackdropClick: handleDrawerClose }}
       >
-        <DrawerHeader sx={{ height: '10rem' }}>
+        <DrawerHeader sx={{ minHeight: '10rem' }}>
           <Avatar>S</Avatar>
           <Typography variant='h6' gutterBottom sx={{ marginTop: '1rem', marginBottom: 0 }}>
             Favourites

@@ -22,7 +22,8 @@ module.exports = {
       ...(page > 1 && page < pageCount
         ? { previous: page - 1 }
         : { previous: pageCount }),
-      ...(page < pageCount ? { next: page + 1 } : {})
+      ...(page < pageCount ? { next: page + 1 } : {}),
+      total: pageCount
     }
   }
 }

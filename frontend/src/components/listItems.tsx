@@ -11,7 +11,7 @@ export default function ListItems () {
   return (
     <div>
       {items.map((item) => (
-        <ListItem button>
+        <ListItem button key={item}>
           <ListItemIcon>
             <FavoriteIcon />
           </ListItemIcon>
