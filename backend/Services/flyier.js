@@ -19,9 +19,7 @@ module.exports = {
 
     return {
       data: flyiers,
-      ...(page > 1 && page < pageCount
-        ? { previous: page - 1 }
-        : { previous: pageCount }),
+      ...(page > 1 && page < pageCount ? { previous: page - 1 } : {}),
       ...(page < pageCount ? { next: page + 1 } : {}),
       total: pageCount
     }

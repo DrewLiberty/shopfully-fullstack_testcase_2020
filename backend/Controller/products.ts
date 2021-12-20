@@ -10,10 +10,10 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(paginate.middleware(100, 100))
+app.use(paginate.middleware(100, 200))
 
 app.use((req, res, next) => {
-  // set default or minimum is 10 (as it was prior to v0.2.0)
+  // set default or minimum is 100 (as it was prior to v0.2.0)
   if (req.query.limit <= 100) req.query.limit = 100
   next()
 })
