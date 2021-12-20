@@ -18,8 +18,13 @@ class Flyer {
   }
 }
 
-function call (): Promise<any> {
-  return fetch('http://localhost:3000')
+function call (page?: number): Promise<any> {
+  let url = 'http://localhost:3000';
+
+  if (page !== undefined)
+    url += `?page=${page}`
+
+  return fetch(url)
     .then(res => res.json())
     .then(res => {
       res.data = res.data.map((el: Object) => new Flyer(el))
