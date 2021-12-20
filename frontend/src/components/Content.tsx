@@ -1,9 +1,9 @@
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense } from 'react'
 import { Flyer, call } from '../api/services/Flyer'
-import { Pagination, Stack } from '@mui/material'
+import { Pagination } from '@mui/material'
 // import ContentCard from './ContentCard'
 
 const ContentCardLazy = React.lazy(() => import('./ContentCard'))
@@ -39,16 +39,11 @@ class Content extends React.Component<IProps, IState> {
     }
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.fetch()
   }
 
-  // componentWillUpdate() {
-  //   this.fetch();
-  // }
-
   onPageChangeHandler = (event: React.ChangeEvent<unknown>, page: number) => {
-    console.log('pagina selezionata ' + page)
     this.setState(prevState => ({
       pages: {
         ...prevState.pages,
@@ -58,10 +53,8 @@ class Content extends React.Component<IProps, IState> {
   }
 
   fetch () {
-    console.log('fetching con pagina ' + this.state.pages.current);
     call(this.state.pages.current)
       .then(res => {
-        console.log('fetching terminato');
         this.setState({ isLoaded: true })
         this.setState({ items: res.data })
 
@@ -80,7 +73,6 @@ class Content extends React.Component<IProps, IState> {
   }
 
   render () {
-    console.log('rendering')
     if (this.state.error) {
       return <div>Error: {this.state.error.message}</div>
     } else if (!this.state.isLoaded) {
@@ -121,47 +113,3 @@ class Content extends React.Component<IProps, IState> {
 }
 
 export default Content
-
-// export default function Content () {
-//   const [error, setError] = useState<any>(null)
-//   const [isLoaded, setIsLoaded] = useState(false)
-//   const [items, setItems] = useState<Array<Flyer>>([])
-//   const [previousPage, setPreviousPage] = useState<number>(1)
-//   const [nextPage, setNextPage] = useState<number>(1)
-//   const [totalPages, setTotalPages] = useState<number>(1)
-//   const [currentPage, setCurrentPage] = useState<number>(1)
-
-//   const onPageChangeHandler = (
-//     event: React.ChangeEvent<unknown>,
-//     page: number
-//   ) => {
-//     console.log('sono qua ' + page)
-//     setCurrentPage(page)
-//   }
-
-//   // questo useEffect verrà eseguito una volta
-//   // simile a componentDidMount()
-//   useEffect(() => {
-//     console.log('sono qua useEffect')
-//     call(currentPage)
-//       .then(res => {
-//         setIsLoaded(true)
-//         setItems(res.data)
-//         if (res.previous) setPreviousPage(res.previous)
-//         if (res.next) setNextPage(res.next)
-//         if (res.total) setTotalPages(res.total)
-//       })
-//       .catch(err => {
-//         setIsLoaded(true)
-//         setError(err)
-//       })
-//   }, [])
-
-//   if (error) {
-//     return <div>Error: {error.message}</div>
-//   } else if (!isLoaded) {
-//     return <div>Loading...</div>
-//   } else {
-//     console.log('sono qua render')
-//   }
-// }
