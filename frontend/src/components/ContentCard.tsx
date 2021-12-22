@@ -6,6 +6,12 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
+import {
+  get as getFavorite,
+  add as addFavorite,
+  remove as removeFavorite
+} from '../api/services/Favorites'
+import { useState } from 'react'
 
 const transformUppercase = (value: string) => value.toUpperCase()
 
@@ -26,6 +32,37 @@ export default function ContentCard ({
   const backgroundImageUrl =
     'https://picsum.photos/seed/' + identifier + '/200/200'
   const cardImageUrl = 'https://picsum.photos/seed/' + identifier + '/200/200'
+
+  const [isFavorite, setIsFavorite] = useState(
+    getFavorite(identifier) ? true : false
+  )
+
+  let currentAction = (
+    <div
+      onClick={() => {
+        addFavorite(identifier, title)
+        setIsFavorite(true)
+      }}
+    >
+      <IconButton>
+        <FavoriteBorderIcon />
+      </IconButton>
+    </div>
+  )
+
+  if (isFavorite)
+    currentAction = (
+      <div
+        onClick={() => {
+          removeFavorite(identifier)
+          setIsFavorite(false)
+        }}
+      >
+        <IconButton>
+          <FavoriteIcon />
+        </IconButton>
+      </div>
+    )
 
   return (
     <Card
@@ -78,14 +115,7 @@ export default function ContentCard ({
         </Typography>
         <Typography variant='caption'>{category}</Typography>
       </CardContent>
-      <CardActions>
-        <IconButton>
-          <FavoriteBorderIcon />
-        </IconButton>
-        <IconButton>
-          <FavoriteIcon />
-        </IconButton>
-      </CardActions>
+      <CardActions>{currentAction}</CardActions>
     </Card>
   )
 }

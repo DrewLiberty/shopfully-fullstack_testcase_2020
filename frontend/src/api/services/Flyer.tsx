@@ -18,13 +18,11 @@ class Flyer {
   }
 }
 
-
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL
 function call (page?: number, limit: number = 50): Promise<any> {
-  let url = `${apiUrl}?limit=${limit}`;
+  let url = `${apiUrl}?limit=${limit}`
 
-  if (page !== undefined)
-    url += `&page=${page}`
+  if (page !== undefined) url += `&page=${page}`
 
   return fetch(url)
     .then(res => res.json())
@@ -32,7 +30,9 @@ function call (page?: number, limit: number = 50): Promise<any> {
       res.data = res.data.map((el: Object) => new Flyer(el))
       return res
     })
-    .catch(err => { throw err })
+    .catch(err => {
+      throw err
+    })
 }
 
 export { Flyer, call }
