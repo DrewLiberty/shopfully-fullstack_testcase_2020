@@ -20,7 +20,7 @@ class Flyer {
 
 const apiUrl = process.env.REACT_APP_API_URL
 function call (page?: number, limit: number = 50): Promise<any> {
-  let url = `${apiUrl}?limit=${limit}`
+  let url = `${apiUrl}?published=true&expired=false&limit=${limit}`
 
   if (page !== undefined) url += `&page=${page}`
 
