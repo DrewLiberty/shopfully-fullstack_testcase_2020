@@ -15,7 +15,7 @@ import { Avatar, Container } from '@mui/material'
 import ListItems from './ListItems'
 import Content from './Content'
 
-const drawerWidth = 240
+const drawerWidth = 280
 
 const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })<{
   open?: boolean
@@ -111,21 +111,21 @@ export default function Dashboard () {
         open={open}
         ModalProps={{ onBackdropClick: handleDrawerClose }}
       >
-        <DrawerHeader sx={{ minHeight: '10rem' }}>
+        <DrawerHeader sx={{ overflow: 'auto' }}>
           <Avatar>S</Avatar>
-          <Typography variant='h6' gutterBottom sx={{ marginTop: '1rem', marginBottom: 0 }}>
+          <Typography
+            variant='h6'
+            gutterBottom
+            sx={{ marginTop: '1rem', marginBottom: 0 }}
+          >
             Favourites
           </Typography>
-          <Typography
-            variant='caption'
-            gutterBottom
-            sx={{ marginTop: '5px' }}
-          >
+          <Typography variant='caption' gutterBottom sx={{ marginTop: '5px' }}>
             The list of your preferred flyers
           </Typography>
         </DrawerHeader>
         <Divider />
-        <List>
+        <List sx={{ maxHeight: '100%', overflow: 'auto' }}>
           <ListItems />
         </List>
       </Drawer>
