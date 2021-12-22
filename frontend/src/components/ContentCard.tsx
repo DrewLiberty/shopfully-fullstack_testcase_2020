@@ -34,8 +34,11 @@ export default function ContentCard ({
   const cardImageUrl = 'https://picsum.photos/seed/' + identifier + '/200/200'
 
   const [isFavorite, setIsFavorite] = useState(
-    getFavorite(identifier) ? true : false
+    getFavorite(identifier) !== undefined ? true : false
   )
+
+  if (isFavorite === true && getFavorite(identifier) === undefined)
+    setIsFavorite(false)
 
   let currentAction = (
     <div

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useState } from 'react'
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
@@ -68,7 +68,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }))
 
 export default function Dashboard () {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
 
   const handleDrawerOpen = () => {
     setOpen(true)
