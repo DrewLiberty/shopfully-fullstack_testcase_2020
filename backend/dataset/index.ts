@@ -4,7 +4,7 @@ import { parse } from 'csv-parse/sync'
 
 const filePath = path.join(__dirname, '/flyers_data.csv')
 
-const fetchDataset = async () => {
+export default async (): Promise<Array<any>> => {
   const file = await open(filePath, 'r')
   const readableStream = file.createReadStream({ start: 0, encoding: 'utf8' })
   let result = []
@@ -20,5 +20,3 @@ const fetchDataset = async () => {
 
   return result
 }
-
-export default fetchDataset

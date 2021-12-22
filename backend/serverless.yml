@@ -13,7 +13,7 @@ functions:
     package:
       include:
         - dataset/flyers_data.csv
-    handler: Controller/products.handler
+    handler: Controller/index.handler
     events:
       - http:
           path: /
