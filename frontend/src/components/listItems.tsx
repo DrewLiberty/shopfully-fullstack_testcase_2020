@@ -2,20 +2,21 @@ import * as React from 'react'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite'
-
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+import { getAll as getAllFavorite } from '../api/services/Favorites'
+import { useState } from 'react'
 
 export default function ListItems () {
+  const [items] = useState(getAllFavorite())
+
   return (
     <div>
-      {items.map((item) => (
-        <ListItem button key={item}>
+      {items.map(item => (
+        <ListItem button key={item.identifier}>
           <ListItemIcon>
             <FavoriteIcon />
           </ListItemIcon>
-          <ListItemText secondary={item + ' Flyer Title'} />
+          <ListItemText secondary={item.title} />
         </ListItem>
       ))}
     </div>
