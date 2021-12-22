@@ -44,12 +44,15 @@ class Content extends React.Component<IProps, IState> {
   }
 
   onPageChangeHandler = (event: React.ChangeEvent<unknown>, page: number) => {
-    this.setState(prevState => ({
-      pages: {
-        ...prevState.pages,
-        current: page
-      }
-    }), this.fetch)
+    this.setState(
+      prevState => ({
+        pages: {
+          ...prevState.pages,
+          current: page
+        }
+      }),
+      this.fetch
+    )
   }
 
   fetch () {
@@ -82,20 +85,20 @@ class Content extends React.Component<IProps, IState> {
         <Container disableGutters maxWidth={false}>
           {/* End hero unit */}
           <Grid container spacing={4}>
-            <Suspense fallback={<div>Loading...</div>}>
-              {this.state.items.map(item => {
-                return (
-                  <Grid item key={item.id} xs={6} sm={4} md={2}>
+            {this.state.items.map(item => {
+              return (
+                <Grid item key={item.id} xs={6} sm={4} md={2}>
+                  <Suspense fallback={<div>Loading...</div>}>
                     <ContentCardLazy
                       identifier={item.id}
                       retailer={item.retailer}
                       title={item.title}
                       category={item.category}
                     />
-                  </Grid>
-                )
-              })}
-            </Suspense>
+                  </Suspense>
+                </Grid>
+              )
+            })}
           </Grid>
 
           <Container sx={{ marginTop: '4rem' }}>

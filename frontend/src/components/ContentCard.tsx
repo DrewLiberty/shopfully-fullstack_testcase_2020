@@ -25,11 +25,7 @@ export default function ContentCard ({
 }) {
   const backgroundImageUrl =
     'https://picsum.photos/seed/' + identifier + '/200/200'
-  const cardImageUrl =
-    'https://picsum.photos/seed/' +
-    identifier +
-    '/200/' +
-    getRandomInt(150, 200)
+  const cardImageUrl = 'https://picsum.photos/seed/' + identifier + '/200/200'
 
   return (
     <Card
